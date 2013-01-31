@@ -1,0 +1,18 @@
+{
+    "limit": 10,
+    "items" :
+    [
+    	{
+	    	"weight": 7,
+	    	"worth": 5
+	    },
+	    {
+	    	"weight": 4,
+	    	"worth": 4
+	    },
+	    {
+	    	"weight": 3,
+	    	"worth": 6
+	    }
+    ]
+}
