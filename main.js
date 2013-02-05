@@ -1,9 +1,10 @@
 
 fs = require('fs')
 var knapsackjs = require('./knapsack.js');
+var t = process.hrtime();	//Start time
 
 //Read Input file
-fs.readFile("data/p01.json", 'utf8', function (err, data) {
+fs.readFile("data/p08.json", 'utf8', function (err, data) {
 	if (err) {
 		console.log('Error: ' + err);
 		return;
@@ -31,4 +32,10 @@ fs.readFile("data/p01.json", 'utf8', function (err, data) {
 	}
 	console.log("Total Worth: " + winningNode.totalWorth);
 	console.log("Bitset: " + winningNode.bitset);
+
+	//Benchmarking
+	t = process.hrtime(t);
+	console.log('benchmark took %d seconds and %d nanoseconds', t[0], t[1]);
 });
+
+
