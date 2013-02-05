@@ -1,0 +1,77 @@
+{
+	"answers" :
+	[
+		{
+			"filename" : "input",
+			"results" : 
+			{
+				"totalWorth" : 11,
+				"bitset" : "1,0,1"
+			}
+		},
+		{
+			"filename" : "p01",
+			"results" : 
+			{
+				"totalWorth" : 309,
+				"bitset" : "1,1,1,1,0,1,0,0,0,0"
+			}
+		},
+		{
+			"filename" : "p02",
+			"results" : 
+			{
+				"totalWorth" : 51,
+				"bitset" : "0,1,1,1,0"
+			}
+		},
+		{
+			"filename" : "p03",
+			"results" : 
+			{
+				"totalWorth" : 150,
+				"bitset" : "1,1,0,0,1,0"
+			}
+		},
+		{
+			"filename" : "p04",
+			"results" : 
+			{
+				"totalWorth" : 107,
+				"bitset" : "1,0,0,1,0,0,0"
+			}
+		},
+		{
+			"filename" : "p05",
+			"results" : 
+			{
+				"totalWorth" : 900,
+				"bitset" : "1,0,1,1,1,0,1,1"
+			}
+		},
+		{
+			"filename" : "p06",
+			"results" : 
+			{
+				"totalWorth" : 1735,
+				"bitset" : "0,1,0,1,0,0,1"
+			}
+		},
+		{
+			"filename" : "p07",
+			"results" : 
+			{
+				"totalWorth" : 1458,
+				"bitset" : "1,0,1,0,1,0,1,1,1,0,0,0,0,1,1"
+			}
+		},
+		{
+			"filename" : "p08",
+			"results" : 
+			{
+				"totalWorth" : 13549094,
+				"bitset" : "1,1,0,1,1,1,0,0,0,1,1,0,1,0,0,1,0,0,0,0,0,1,1,1"
+			}
+		}
+	]
+}
