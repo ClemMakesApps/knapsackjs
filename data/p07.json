@@ -1,0 +1,65 @@
+{
+    "limit": 750,
+    "items": [
+        {
+            "weight": 70,
+            "worth": 135
+        },
+        {
+            "weight": 73,
+            "worth": 139
+        },
+        {
+            "weight": 77,
+            "worth": 149
+        },
+        {
+            "weight": 80,
+            "worth": 150
+        },
+        {
+            "weight": 82,
+            "worth": 156
+        },
+        {
+            "weight": 87,
+            "worth": 163
+        },
+        {
+            "weight": 90,
+            "worth": 173
+        },
+        {
+            "weight": 94,
+            "worth": 184
+        },
+        {
+            "weight": 98,
+            "worth": 192
+        },
+        {
+            "weight": 106,
+            "worth": 201
+        },
+        {
+            "weight": 110,
+            "worth": 210
+        },
+        {
+            "weight": 113,
+            "worth": 214
+        },
+        {
+            "weight": 115,
+            "worth": 221
+        },
+        {
+            "weight": 118,
+            "worth": 229
+        },
+        {
+            "weight": 120,
+            "worth": 240
+        }
+    ]
+}

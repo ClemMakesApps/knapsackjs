@@ -1,0 +1,29 @@
+{
+    "limit": 190,
+    "items": [
+        {
+            "weight": 56,
+            "worth": 50
+        },
+        {
+            "weight": 59,
+            "worth": 50
+        },
+        {
+            "weight": 80,
+            "worth": 64
+        },
+        {
+            "weight": 64,
+            "worth": 46
+        },
+        {
+            "weight": 75,
+            "worth": 50
+        },
+        {
+            "weight": 17,
+            "worth": 5
+        }
+    ]
+}
