@@ -1,0 +1,80 @@
+{
+    "limit": 40,
+    "items": [
+        {
+            "weight": 3,
+            "worth": 6,
+            "name": "A"
+        },
+        {
+            "weight": 5,
+            "worth": 3,
+            "name": "B"
+        },
+        {
+            "weight": 1,
+            "worth": 2,
+            "name": "C"
+        },
+        {
+            "weight": 7,
+            "worth": 5,
+            "name": "D"
+        },
+        {
+            "weight": 4,
+            "worth": 5,
+            "name": "E"
+        },
+        {
+            "weight": 1,
+            "worth": 2,
+            "name": "F"
+        },
+        {
+            "weight": 6,
+            "worth": 8,
+            "name": "G"
+        },
+        {
+            "weight": 8,
+            "worth": 2,
+            "name": "H"
+        },
+        {
+            "weight": 3,
+            "worth": 6,
+            "name": "I"
+        },
+        {
+            "weight": 5,
+            "worth": 9,
+            "name": "J"
+        },
+        {
+            "weight": 1,
+            "worth": 6,
+            "name": "K"
+        },
+        {
+            "weight": 9,
+            "worth": 5,
+            "name": "L"
+        },
+        {
+            "weight": 7,
+            "worth": 1,
+            "name": "M"
+        },
+        {
+            "weight": 3,
+            "worth": 5,
+            "name": "N"
+        },
+        {
+            "weight": 5,
+            "worth": 7,
+            "name": "O"
+        }
+    ]
+}
