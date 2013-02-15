@@ -60,9 +60,10 @@ exports.setInventory = function(newInventory) {
 	inventory = newInventory;
 }
 
-exports.item = function (weight, worth) {
+exports.item = function (weight, worth, name) {
 	this.weight = weight;
 	this.worth = worth;
+	this.name = name;
 }
 
 exports.solveKnapsack = function() {

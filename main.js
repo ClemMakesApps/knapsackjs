@@ -1,10 +1,8 @@
 
 fs = require('fs')
 var knapsackjs = require('./knapsack.js');
-var t = process.hrtime();	//Start time
-
 //Read Input file
-fs.readFile("data/p08.json", 'utf8', function (err, data) {
+fs.readFile("data/input.json", 'utf8', function (err, data) {
 	if (err) {
 		console.log('Error: ' + err);
 		return;
@@ -12,14 +10,18 @@ fs.readFile("data/p08.json", 'utf8', function (err, data) {
  
  	data = JSON.parse(data);
 
- 	knapsackjs.setNewLimit(data.limit);
-
  	//Load data into inventory array
  	var inventory = new Array();
 	for(var i = 0; i < data.items.length; i++) {
-	  var loadItem = new knapsackjs.item(data.items[i].weight, data.items[i].worth);
+	  var loadItem = new knapsackjs.item(data.items[i].weight, data.items[i].worth, data.items[i].name);
 	  inventory.push(loadItem);
 	}
+
+
+	var t = process.hrtime();	//Start time
+
+	//Start Knapsack Process
+ 	knapsackjs.setNewLimit(data.limit);
 	knapsackjs.setInventory(inventory);
 
 	winningNode = knapsackjs.solveKnapsack();
