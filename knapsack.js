@@ -1,5 +1,6 @@
 var inventory = new Array();
 var limit = 0;
+var lowerBound = -1;
 
 var nodeData = function (bitset, totalWeight, totalWorth) {
 	this.bitset = bitset;
@@ -63,9 +64,12 @@ exports.setInventory = function(newInventory) {
 exports.item = function (weight, worth) {
 	this.weight = weight;
 	this.worth = worth;
+	this.ratio = worth/weight;
 }
 
 exports.solveKnapsack = function() {
+	calculateLowerBound();
+
 	var firstNodeBitset = new Array();
 	 
 	var firstNodeTake = processNode(firstNodeBitset, 1);
@@ -80,4 +84,20 @@ exports.solveKnapsack = function() {
 	}
 
 	return winningNode;
+}
+
+//Greedy Implementation
+calculateLowerBound = function () {
+
+	inventory.sort(function(a,b) { return parseFloat(b.ratio) - parseFloat(a.ratio)} );
+	
+	for(var i = 0; i < inventory.length; i++) {
+		lowerBound += inventory[i].weight;
+
+		if(lowerBound > limit) {
+			lowerBound -= inventory[i].weight;
+		} else if(lowerBound == limit) {
+			return;
+		}
+	}
 }
