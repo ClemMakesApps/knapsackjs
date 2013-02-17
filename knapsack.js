@@ -28,15 +28,19 @@ var nodeWorth = function(bitset) {
 	return returnNode;
 }
 
-var processNode = function(nodeBitset, take) {
+var processNode = function(nodeBitset, take, currentWeight) {
 	var newBitset = nodeBitset.slice(0);
 	newBitset.push(take);
 
+	var newCurrentWeight = currentWeight + inventory[newBitset.length-1].weight;
+
 	if(newBitset.length == inventory.length) {
 		return nodeWorth(newBitset);
+	} else if(newCurrentWeight > limit) {
+		return processNode(newBitset, 0, newCurrentWeight);
 	} else {
-		var t = processNode(newBitset, 1);
-		var i = processNode(newBitset, 0);
+		var t = processNode(newBitset, 1, newCurrentWeight);
+		var i = processNode(newBitset, 0, newCurrentWeight);
 		if( t.totalWorth > i.totalWorth) {
 			return t;
 		} else {

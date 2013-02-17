@@ -4,7 +4,7 @@ var knapsackjs = require('./knapsack.js');
 var t = process.hrtime();	//Start time
 
 //Read Input file
-fs.readFile("data/p08.json", 'utf8', function (err, data) {
+fs.readFile("data/classData/k25.json", 'utf8', function (err, data) {
 	if (err) {
 		console.log('Error: ' + err);
 		return;
