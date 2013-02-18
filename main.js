@@ -4,7 +4,7 @@ var knapsackjs = require('./knapsack.js');
 var t = process.hrtime();	//Start time
 
 //Read Input file
-fs.readFile("data/classData/k25.json", 'utf8', function (err, data) {
+fs.readFile("data/classData/k20.json", 'utf8', function (err, data) {
 	if (err) {
 		console.log('Error: ' + err);
 		return;
@@ -23,7 +23,6 @@ fs.readFile("data/classData/k25.json", 'utf8', function (err, data) {
 	knapsackjs.setInventory(inventory);
 
 	winningNode = knapsackjs.solveKnapsack();
-
 	console.log("Winning Combination:");
 	for(var i = 0; i < winningNode.bitset.length; i++) {
 		if(winningNode.bitset[i] == '1') {
