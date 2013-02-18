@@ -8,45 +8,28 @@ var nodeData = function (bitset, totalWeight, totalWorth) {
 	this.totalWorth = totalWorth;
 }
 
-// var nodeWorth = function(bitset) {
-// 	var totalWorth = 0;
-// 	var totalWeight = 0;
-
-// 	for(var i = 0; i < bitset.length; i++) {
-// 		if(bitset[i] == '1') {
-// 			var node = inventory[i];
-// 			totalWorth += node.worth;
-// 			totalWeight += node.weight;
-// 			if(totalWeight > limit) {
-// 				var returnNode = new nodeData(bitset, totalWeight, -1);
-// 				return returnNode;
-// 			}
-// 		}
-// 	}
-
-// 	var returnNode = new nodeData(bitset, totalWeight, totalWorth);
-// 	return returnNode;
-// }
-
-var processNode = function(nodeBitset, take, currentWeight, currentWorth) {
-	var newBitset = nodeBitset.slice(0);
+var processNode = function(currentNode, take) {
+	var newBitset = currentNode.bitset.slice(0);
 	newBitset.push(take);
 
-	var newCurrentWeight = currentWeight;
-	var newCurrentWorth = currentWorth;
+	var newCurrentWeight = currentNode.totalWeight;
+	var newCurrentWorth = currentNode.totalWorth;
+
 	if(take == 1) {
 		newCurrentWeight += inventory[newBitset.length-1].weight;
 		newCurrentWorth += inventory[newBitset.length-1].worth;
 	}
 
+	var returnNode = new nodeData(newBitset, newCurrentWeight, newCurrentWorth);
 	if(newBitset.length == inventory.length) {
-		var newNode = new nodeData(newBitset, newCurrentWeight, newCurrentWorth);
-		return newNode;
+		return returnNode;
 	} else if(newCurrentWeight > limit) {
-		return processNode(newBitset, 0, newCurrentWeight, newCurrentWorth);
+		//Optimization #1
+		//Only go for right children when weight exceeds limit
+		return processNode(returnNode, 0);
 	} else {
-		var t = processNode(newBitset, 1, newCurrentWeight, newCurrentWorth);
-		var i = processNode(newBitset, 0, newCurrentWeight, newCurrentWorth);
+		var t = processNode(returnNode, 1);
+		var i = processNode(returnNode, 0);
 		if( t.totalWorth > i.totalWorth) {
 			return t;
 		} else {
@@ -82,8 +65,10 @@ exports.solveKnapsack = function() {
 
 	var firstNodeBitset = new Array();
 	 
-	var firstNodeTake = processNode(firstNodeBitset, 1, 0, 0);
-	var firstNodeIgnore = processNode(firstNodeBitset, 0, 0, 0);
+	var firstNode = new nodeData(firstNodeBitset, 0, 0)
+
+	var firstNodeTake = processNode(firstNode, 1);
+	var firstNodeIgnore = processNode(firstNode, 0);
 	
 	var winningNode;
 
