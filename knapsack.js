@@ -1,6 +1,7 @@
 var inventory = new Array();
 var limit = 0;
 var upperBoundWorth = 0;
+var mode = 0;
 
 var nodeData = function (bitset, totalWeight, totalWorth) {
 	this.bitset = bitset;
@@ -26,14 +27,23 @@ var processNode = function(currentNode, take) {
 			returnNode = new nodeData(newBitset, newCurrentWeight, -1);
 		}
 		return returnNode;
-	} else if(newCurrentWeight > limit || newCurrentWorth > upperBoundWorth) {
-		//Optimization #1
-		//Only go for right children when weight exceeds limit
-
-		//Optimization #2
-		//Only go for right children when worth exceeds upperbound
-		return processNode(returnNode, 0);
 	} else {
+
+		//Mode determines optimization type
+		if(mode == 1) {
+			//Optimization #1
+			//Only go for right children when weight exceeds limit
+			if(newCurrentWeight > limit) {
+				return processNode(returnNode, 0);
+			}
+		} else if(mode == 2) {
+			//Optimization #2
+			//Only go for right children when worth exceeds upperbound
+			if(newCurrentWeight > limit || newCurrentWorth > upperBoundWorth) { 
+				return processNode(returnNode, 0);
+			}
+		}
+
 		var t = processNode(returnNode, 1);
 		var i = processNode(returnNode, 0);
 		if( t.totalWorth > i.totalWorth) {
@@ -42,6 +52,10 @@ var processNode = function(currentNode, take) {
 			return i;
 		}
 	}
+}
+
+exports.clearInventory = function() {
+	inventory.length = 0;
 }
 
 exports.getLimit = function() {
@@ -67,12 +81,18 @@ exports.item = function (weight, worth, name) {
 	this.name = name;
 }
 
-exports.solveKnapsack = function() {
-	//calculateLowerBound();
+exports.solveKnapsack = function(newMode) {
+	// MODES
+	// 0 - Brute Force Tree
+	// 1 - Tree Optimized w/ weight optimizations
+	// 2 - Tree Optimized w/ weight optimizations + greedy upper bound optimizations
+	mode = newMode;
 
-	var greedyNode = calculateGreedy();
-	var factor = limit/greedyNode.totalWeight;
-	upperBoundWorth = greedyNode.totalWorth * factor;
+	if(mode == 2) {
+		var greedyNode = calculateGreedy();
+		var factor = limit/greedyNode.totalWeight;
+		upperBoundWorth = greedyNode.totalWorth * factor;
+	}
 
 	var firstNodeBitset = new Array();
 	 
