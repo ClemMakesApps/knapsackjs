@@ -22,6 +22,9 @@ var processNode = function(currentNode, take) {
 
 	var returnNode = new nodeData(newBitset, newCurrentWeight, newCurrentWorth);
 	if(newBitset.length == inventory.length) {
+		if(newCurrentWeight > limit) {
+			returnNode = new nodeData(newBitset, newCurrentWeight, -1);
+		}
 		return returnNode;
 	} else if(newCurrentWeight > limit || newCurrentWorth > upperBoundWorth) {
 		//Optimization #1

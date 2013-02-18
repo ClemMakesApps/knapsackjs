@@ -4,7 +4,7 @@ var knapsackjs = require('./knapsack.js');
 var t = process.hrtime();	//Start time
 
 //Read Input file
-fs.readFile("data/classData/k05.json", 'utf8', function (err, data) {
+fs.readFile("data/classData/k15.json", 'utf8', function (err, data) {
 	if (err) {
 		console.log('Error: ' + err);
 		return;
@@ -29,6 +29,7 @@ fs.readFile("data/classData/k05.json", 'utf8', function (err, data) {
 			console.log(inventory[i]);
 		}
 	}
+	console.log("Limit: " + knapsackjs.getLimit());
 	console.log("Total Weight: " + winningNode.totalWeight);
 	console.log("Total Worth: " + winningNode.totalWorth);
 	console.log("Bitset: " + winningNode.bitset);
