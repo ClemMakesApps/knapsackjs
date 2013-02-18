@@ -1,5 +1,7 @@
 var inventory = new Array();
 var limit = 0;
+var upperBoundWorth = 0;
+var mode = 0;
 
 var nodeData = function (bitset, totalWeight, totalWorth) {
 	this.bitset = bitset;
@@ -7,41 +9,53 @@ var nodeData = function (bitset, totalWeight, totalWorth) {
 	this.totalWorth = totalWorth;
 }
 
-var nodeWorth = function(bitset) {
-	var totalWorth = 0;
-	var totalWeight = 0;
-
-	for(var i = 0; i < bitset.length; i++) {
-		if(bitset[i] == '1') {
-			var node = inventory[i];
-			totalWorth += node.worth;
-			totalWeight += node.weight;
-			if(totalWeight > limit) {
-				var returnNode = new nodeData(bitset, totalWeight, -1);
-				return returnNode;
-			}
-		}
-	}
-
-	var returnNode = new nodeData(bitset, totalWeight, totalWorth);
-	return returnNode;
-}
-
-var processNode = function(nodeBitset, take) {
-	var newBitset = nodeBitset.slice(0);
+var processNode = function(currentNode, take) {
+	var newBitset = currentNode.bitset.slice(0);
 	newBitset.push(take);
 
+	var newCurrentWeight = currentNode.totalWeight;
+	var newCurrentWorth = currentNode.totalWorth;
+
+	if(take == 1) {
+		newCurrentWeight += inventory[newBitset.length-1].weight;
+		newCurrentWorth += inventory[newBitset.length-1].worth;
+	}
+
+	var returnNode = new nodeData(newBitset, newCurrentWeight, newCurrentWorth);
 	if(newBitset.length == inventory.length) {
-		return nodeWorth(newBitset);
+		if(newCurrentWeight > limit) {
+			returnNode = new nodeData(newBitset, newCurrentWeight, -1);
+		}
+		return returnNode;
 	} else {
-		var t = processNode(newBitset, 1);
-		var i = processNode(newBitset, 0);
+
+		//Mode determines optimization type
+		if(mode == 1) {
+			//Optimization #1
+			//Only go for right children when weight exceeds limit
+			if(newCurrentWeight > limit) {
+				return processNode(returnNode, 0);
+			}
+		} else if(mode == 2) {
+			//Optimization #2
+			//Only go for right children when worth exceeds upperbound
+			if(newCurrentWeight > limit || newCurrentWorth > upperBoundWorth) { 
+				return processNode(returnNode, 0);
+			}
+		}
+
+		var t = processNode(returnNode, 1);
+		var i = processNode(returnNode, 0);
 		if( t.totalWorth > i.totalWorth) {
 			return t;
 		} else {
 			return i;
 		}
 	}
+}
+
+exports.clearInventory = function() {
+	inventory.length = 0;
 }
 
 exports.getLimit = function() {
@@ -63,14 +77,32 @@ exports.setInventory = function(newInventory) {
 exports.item = function (weight, worth, name) {
 	this.weight = weight;
 	this.worth = worth;
+<<<<<<< HEAD
+=======
+	this.ratio = worth/weight;
+>>>>>>> Greedy
 	this.name = name;
 }
 
-exports.solveKnapsack = function() {
+exports.solveKnapsack = function(newMode) {
+	// MODES
+	// 0 - Brute Force Tree
+	// 1 - Tree Optimized w/ weight optimizations
+	// 2 - Tree Optimized w/ weight optimizations + greedy upper bound optimizations
+	mode = newMode;
+
+	if(mode == 2) {
+		var greedyNode = calculateGreedy();
+		var factor = limit/greedyNode.totalWeight;
+		upperBoundWorth = greedyNode.totalWorth * factor;
+	}
+
 	var firstNodeBitset = new Array();
 	 
-	var firstNodeTake = processNode(firstNodeBitset, 1);
-	var firstNodeIgnore = processNode(firstNodeBitset, 0);
+	var firstNode = new nodeData(firstNodeBitset, 0, 0)
+
+	var firstNodeTake = processNode(firstNode, 1);
+	var firstNodeIgnore = processNode(firstNode, 0);
 	
 	var winningNode;
 
@@ -81,4 +113,31 @@ exports.solveKnapsack = function() {
 	}
 
 	return winningNode;
+}
+
+//Greedy Implementation
+var calculateGreedy = function () {
+	var totalWeight = 0;
+	var totalWorth = 0;
+	var totalBitset = new Array();
+
+	inventory.sort(function(a,b) { return parseFloat(b.ratio) - parseFloat(a.ratio)} );
+	
+	for(var i = 0; i < inventory.length; i++) {
+		totalWeight += inventory[i].weight;
+		totalWorth += inventory[i].worth;
+		totalBitset[i] = 1;
+
+		if(totalWeight > limit) {
+			totalWeight -= inventory[i].weight;
+			totalWorth -= inventory[i].worth;
+			totalBitset[i] = 0;
+		} else if(totalWeight == limit) {
+			break;
+		}
+	}
+
+	var returnNode = new nodeData(totalBitset, totalWeight, totalWorth);
+
+	return returnNode;
 }
