@@ -17,7 +17,7 @@ fs.readFile("data/classData/k05.json", 'utf8', function (err, data) {
  	//Load data into inventory array
  	var inventory = new Array();
 	for(var i = 0; i < data.items.length; i++) {
-	  var loadItem = new knapsackjs.item(data.items[i].weight, data.items[i].worth);
+	  var loadItem = new knapsackjs.item(data.items[i].weight, data.items[i].worth, data.items[i].name);
 	  inventory.push(loadItem);
 	}
 	knapsackjs.setInventory(inventory);
@@ -29,6 +29,7 @@ fs.readFile("data/classData/k05.json", 'utf8', function (err, data) {
 			console.log(inventory[i]);
 		}
 	}
+	console.log("Total Weight: " + winningNode.totalWeight);
 	console.log("Total Worth: " + winningNode.totalWorth);
 	console.log("Bitset: " + winningNode.bitset);
 
