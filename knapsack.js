@@ -8,39 +8,45 @@ var nodeData = function (bitset, totalWeight, totalWorth) {
 	this.totalWorth = totalWorth;
 }
 
-var nodeWorth = function(bitset) {
-	var totalWorth = 0;
-	var totalWeight = 0;
+// var nodeWorth = function(bitset) {
+// 	var totalWorth = 0;
+// 	var totalWeight = 0;
 
-	for(var i = 0; i < bitset.length; i++) {
-		if(bitset[i] == '1') {
-			var node = inventory[i];
-			totalWorth += node.worth;
-			totalWeight += node.weight;
-			if(totalWeight > limit) {
-				var returnNode = new nodeData(bitset, totalWeight, -1);
-				return returnNode;
-			}
-		}
-	}
+// 	for(var i = 0; i < bitset.length; i++) {
+// 		if(bitset[i] == '1') {
+// 			var node = inventory[i];
+// 			totalWorth += node.worth;
+// 			totalWeight += node.weight;
+// 			if(totalWeight > limit) {
+// 				var returnNode = new nodeData(bitset, totalWeight, -1);
+// 				return returnNode;
+// 			}
+// 		}
+// 	}
 
-	var returnNode = new nodeData(bitset, totalWeight, totalWorth);
-	return returnNode;
-}
+// 	var returnNode = new nodeData(bitset, totalWeight, totalWorth);
+// 	return returnNode;
+// }
 
-var processNode = function(nodeBitset, take, currentWeight) {
+var processNode = function(nodeBitset, take, currentWeight, currentWorth) {
 	var newBitset = nodeBitset.slice(0);
 	newBitset.push(take);
 
-	var newCurrentWeight = currentWeight + inventory[newBitset.length-1].weight;
+	var newCurrentWeight = currentWeight;
+	var newCurrentWorth = currentWorth;
+	if(take == 1) {
+		newCurrentWeight += inventory[newBitset.length-1].weight;
+		newCurrentWorth += inventory[newBitset.length-1].worth;
+	}
 
 	if(newBitset.length == inventory.length) {
-		return nodeWorth(newBitset);
+		var newNode = new nodeData(newBitset, newCurrentWeight, newCurrentWorth);
+		return newNode;
 	} else if(newCurrentWeight > limit) {
-		return processNode(newBitset, 0, newCurrentWeight);
+		return processNode(newBitset, 0, newCurrentWeight, newCurrentWorth);
 	} else {
-		var t = processNode(newBitset, 1, newCurrentWeight);
-		var i = processNode(newBitset, 0, newCurrentWeight);
+		var t = processNode(newBitset, 1, newCurrentWeight, newCurrentWorth);
+		var i = processNode(newBitset, 0, newCurrentWeight, newCurrentWorth);
 		if( t.totalWorth > i.totalWorth) {
 			return t;
 		} else {
@@ -72,12 +78,12 @@ exports.item = function (weight, worth) {
 }
 
 exports.solveKnapsack = function() {
-	calculateLowerBound();
+	//calculateLowerBound();
 
 	var firstNodeBitset = new Array();
 	 
-	var firstNodeTake = processNode(firstNodeBitset, 1);
-	var firstNodeIgnore = processNode(firstNodeBitset, 0);
+	var firstNodeTake = processNode(firstNodeBitset, 1, 0, 0);
+	var firstNodeIgnore = processNode(firstNodeBitset, 0, 0, 0);
 	
 	var winningNode;
 
@@ -91,7 +97,7 @@ exports.solveKnapsack = function() {
 }
 
 //Greedy Implementation
-calculateLowerBound = function () {
+var calculateLowerBound = function () {
 
 	inventory.sort(function(a,b) { return parseFloat(b.ratio) - parseFloat(a.ratio)} );
 	
