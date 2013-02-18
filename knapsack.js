@@ -77,10 +77,7 @@ exports.setInventory = function(newInventory) {
 exports.item = function (weight, worth, name) {
 	this.weight = weight;
 	this.worth = worth;
-<<<<<<< HEAD
-=======
 	this.ratio = worth/weight;
->>>>>>> Greedy
 	this.name = name;
 }
 
