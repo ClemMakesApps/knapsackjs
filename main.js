@@ -5,7 +5,13 @@ var inputFilename = process.argv[2];
 	// 0 - Brute Force Tree
 	// 1 - Tree Optimized w/ weight optimizations
 	// 2 - Tree Optimized w/ weight optimizations + greedy upper bound optimizations
+	// 3 - Greedy
 var modeType = process.argv[3];
+var modeArray = new Array();
+modeArray.push("Brute Force");
+modeArray.push("Weight Opt");
+modeArray.push("Weight Opt + Greedy Upper Bound");
+modeArray.push("Greedy");
 
 fs = require('fs')
 var knapsackjs = require('./knapsack.js');
@@ -33,7 +39,7 @@ fs.readFile(inputFilename, 'utf8', function (err, data) {
 	winningNode = knapsackjs.solveKnapsack(modeType);
 
 	var answerSack = new Array();
-	console.log("Winning Combination:");
+	//console.log("Winning Combination:");
 	for(var i = 0; i < winningNode.bitset.length; i++) {
 		if(winningNode.bitset[i] == '1') {
 			answerSack.push(inventory[i]);
@@ -45,11 +51,9 @@ fs.readFile(inputFilename, 'utf8', function (err, data) {
 	    return 0;
 	} );
 	//console.log(answerSack);
-
+	console.log("Input: " + inputFilename + ", Mode: " + modeArray[parseInt(modeType)]);
 	console.log("Limit: " + knapsackjs.getLimit());
-	console.log("Total Weight: " + winningNode.totalWeight);
-	console.log("Total Worth: " + winningNode.totalWorth);
-	console.log("Bitset: " + winningNode.bitset);
+	console.log("Win Weight: " + winningNode.totalWeight + ", Worth: " + winningNode.totalWorth);
 
 	//Benchmarking
 	t = process.hrtime(t);

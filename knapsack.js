@@ -86,12 +86,15 @@ exports.solveKnapsack = function(newMode) {
 	// 0 - Brute Force Tree
 	// 1 - Tree Optimized w/ weight optimizations
 	// 2 - Tree Optimized w/ weight optimizations + greedy upper bound optimizations
+	// 3 - Greedy
 	mode = newMode;
 
 	if(mode == 2) {
 		var greedyNode = calculateGreedy();
 		var factor = limit/greedyNode.totalWeight;
 		upperBoundWorth = greedyNode.totalWorth * factor;
+	} else if (mode == 3) {
+		return calculateGreedy();
 	}
 
 	var firstNodeBitset = new Array();
