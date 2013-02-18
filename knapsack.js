@@ -1,6 +1,6 @@
 var inventory = new Array();
 var limit = 0;
-var lowerBound = -1;
+var upperBoundWorth = 0;
 
 var nodeData = function (bitset, totalWeight, totalWorth) {
 	this.bitset = bitset;
@@ -23,9 +23,12 @@ var processNode = function(currentNode, take) {
 	var returnNode = new nodeData(newBitset, newCurrentWeight, newCurrentWorth);
 	if(newBitset.length == inventory.length) {
 		return returnNode;
-	} else if(newCurrentWeight > limit) {
+	} else if(newCurrentWeight > limit || newCurrentWorth > upperBoundWorth) {
 		//Optimization #1
 		//Only go for right children when weight exceeds limit
+
+		//Optimization #2
+		//Only go for right children when worth exceeds upperbound
 		return processNode(returnNode, 0);
 	} else {
 		var t = processNode(returnNode, 1);
@@ -63,6 +66,10 @@ exports.item = function (weight, worth) {
 exports.solveKnapsack = function() {
 	//calculateLowerBound();
 
+	var greedyNode = calculateGreedy();
+	var factor = limit/greedyNode.totalWeight;
+	upperBoundWorth = greedyNode.totalWorth * factor;
+
 	var firstNodeBitset = new Array();
 	 
 	var firstNode = new nodeData(firstNodeBitset, 0, 0)
@@ -82,17 +89,28 @@ exports.solveKnapsack = function() {
 }
 
 //Greedy Implementation
-var calculateLowerBound = function () {
+var calculateGreedy = function () {
+	var totalWeight = 0;
+	var totalWorth = 0;
+	var totalBitset = new Array();
 
 	inventory.sort(function(a,b) { return parseFloat(b.ratio) - parseFloat(a.ratio)} );
 	
 	for(var i = 0; i < inventory.length; i++) {
-		lowerBound += inventory[i].weight;
+		totalWeight += inventory[i].weight;
+		totalWorth += inventory[i].worth;
+		totalBitset[i] = 1;
 
-		if(lowerBound > limit) {
-			lowerBound -= inventory[i].weight;
-		} else if(lowerBound == limit) {
-			return;
+		if(totalWeight > limit) {
+			totalWeight -= inventory[i].weight;
+			totalWorth -= inventory[i].worth;
+			totalBitset[i] = 0;
+		} else if(totalWeight == limit) {
+			break;
 		}
 	}
+
+	var returnNode = new nodeData(totalBitset, totalWeight, totalWorth);
+
+	return returnNode;
 }
