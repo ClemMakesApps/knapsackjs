@@ -1,0 +1,151 @@
+Clements-MacBook-Air:knapsackjs ClementHo$ sh runKnapsack.sh 
+=== data/classData/k05.json ===
+Input: data/classData/k05.json, Mode: Brute Force
+Limit: 13
+Win Weight: 13, Worth: 16
+benchmark took 0 seconds and 11090624 nanoseconds
+============================
+Input: data/classData/k05.json, Mode: Weight Opt
+Limit: 13
+Win Weight: 13, Worth: 16
+benchmark took 0 seconds and 11099867 nanoseconds
+============================
+Input: data/classData/k05.json, Mode: Weight Opt + Greedy Upper Bound
+Limit: 13
+Win Weight: 13, Worth: 16
+benchmark took 0 seconds and 11075679 nanoseconds
+============================
+Input: data/classData/k05.json, Mode: Greedy
+Limit: 13
+Win Weight: 13, Worth: 16
+benchmark took 0 seconds and 11296232 nanoseconds
+
+=== data/classData/k10.json ===
+Input: data/classData/k10.json, Mode: Brute Force
+Limit: 30
+Win Weight: 30, Worth: 43
+benchmark took 0 seconds and 15183692 nanoseconds
+============================
+Input: data/classData/k10.json, Mode: Weight Opt
+Limit: 30
+Win Weight: 30, Worth: 43
+benchmark took 0 seconds and 13503594 nanoseconds
+============================
+Input: data/classData/k10.json, Mode: Weight Opt + Greedy Upper Bound
+Limit: 30
+Win Weight: 30, Worth: 43
+benchmark took 0 seconds and 13140616 nanoseconds
+============================
+Input: data/classData/k10.json, Mode: Greedy
+Limit: 30
+Win Weight: 30, Worth: 43
+benchmark took 0 seconds and 12084191 nanoseconds
+
+=== data/classData/k15.json ===
+Input: data/classData/k15.json, Mode: Brute Force
+Limit: 40
+Win Weight: 39, Worth: 61
+benchmark took 0 seconds and 33556824 nanoseconds
+============================
+Input: data/classData/k15.json, Mode: Weight Opt
+Limit: 40
+Win Weight: 39, Worth: 61
+benchmark took 0 seconds and 25110347 nanoseconds
+============================
+Input: data/classData/k15.json, Mode: Weight Opt + Greedy Upper Bound
+Limit: 40
+Win Weight: 39, Worth: 61
+benchmark took 0 seconds and 29945333 nanoseconds
+============================
+Input: data/classData/k15.json, Mode: Greedy
+Limit: 40
+Win Weight: 39, Worth: 61
+benchmark took 0 seconds and 11457838 nanoseconds
+
+=== data/classData/k20.json ===
+Input: data/classData/k20.json, Mode: Brute Force
+Limit: 68
+Win Weight: 65, Worth: 90
+benchmark took 0 seconds and 521806360 nanoseconds
+============================
+Input: data/classData/k20.json, Mode: Weight Opt
+Limit: 68
+Win Weight: 65, Worth: 90
+benchmark took 0 seconds and 382867319 nanoseconds
+============================
+Input: data/classData/k20.json, Mode: Weight Opt + Greedy Upper Bound
+Limit: 68
+Win Weight: 65, Worth: 90
+benchmark took 0 seconds and 520656970 nanoseconds
+============================
+Input: data/classData/k20.json, Mode: Greedy
+Limit: 68
+Win Weight: 64, Worth: 90
+benchmark took 0 seconds and 12760794 nanoseconds
+
+=== data/classData/k25.json ===
+Input: data/classData/k25.json, Mode: Brute Force
+Limit: 84
+Win Weight: 84, Worth: 115
+benchmark took 15 seconds and 911877776 nanoseconds
+============================
+Input: data/classData/k25.json, Mode: Weight Opt
+Limit: 84
+Win Weight: 84, Worth: 115
+benchmark took 18 seconds and 10255935 nanoseconds
+============================
+Input: data/classData/k25.json, Mode: Weight Opt + Greedy Upper Bound
+Limit: 84
+Win Weight: 84, Worth: 115
+benchmark took 16 seconds and 794931172 nanoseconds
+============================
+Input: data/classData/k25.json, Mode: Greedy
+Limit: 84
+Win Weight: 80, Worth: 113
+benchmark took 0 seconds and 11855896 nanoseconds
+
+=== data/classData/k30.json ===
+Input: data/classData/k30.json, Mode: Brute Force
+Limit: 96
+Win Weight: 96, Worth: 129
+benchmark took 520 seconds and 406504975 nanoseconds
+============================
+Input: data/classData/k30.json, Mode: Weight Opt
+Limit: 96
+Win Weight: 96, Worth: 129
+benchmark took 380 seconds and 640354983 nanoseconds
+============================
+Input: data/classData/k30.json, Mode: Weight Opt + Greedy Upper Bound
+Limit: 96
+Win Weight: 96, Worth: 129
+benchmark took 552 seconds and 404533993 nanoseconds
+============================
+Input: data/classData/k30.json, Mode: Greedy
+Limit: 96
+Win Weight: 95, Worth: 129
+benchmark took 0 seconds and 11884014 nanoseconds
+
+=== data/classData/k35.json ===
+Input: data/classData/k35.json, Mode: Brute Force
+Limit: 104
+Win Weight: 102, Worth: 143
+benchmark took 17090 seconds and 283610491 nanoseconds
+============================
+Input: data/classData/k35.json, Mode: Weight Opt
+Limit: 104
+Win Weight: 102, Worth: 143
+benchmark took 12357 seconds and 757120516 nanoseconds
+============================
+Input: data/classData/k35.json, Mode: Weight Opt + Greedy Upper Bound
+Limit: 104
+Win Weight: 104, Worth: 143
+benchmark took 16512 seconds and 875416488 nanoseconds
+============================
+Input: data/classData/k35.json, Mode: Greedy
+Limit: 104
+Win Weight: 102, Worth: 143
+benchmark took 0 seconds and 12164707 nanoseconds
+
+=== data/classData/k40.json ===
+^Z
+[10]+  Stopped                 sh runKnapsack.sh
